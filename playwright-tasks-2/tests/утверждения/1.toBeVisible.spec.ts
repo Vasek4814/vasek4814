@@ -10,6 +10,9 @@ test.describe('Тестирование видимости элементов с
     // 1. Найти элемент с id "always-visible"
     // 2. Проверить что элемент видим с помощью toBeVisible()
     // 3. Проверить что элемент содержит текст "Всегда видимый элемент"
+    const visibleElement = page.locator('#always-visible');
+    await expect(visibleElement).toBeVisible();
+    await expect(visibleElement).toHaveText('Всегда видимый элемент');
   });
 
   test('Тест элементов с разными типами скрытия', async ({ page }) => {
@@ -20,6 +23,12 @@ test.describe('Тестирование видимости элементов с
     //    - #toggle-opacity (opacity: 0)
     // 2. Проверить что #toggle-display и #toggle-visibility не видны с помощью not.toBeVisible()
     // 3. Проверить что #toggle-opacity виден с помощью toBeVisible()
+    const toggleDisplay = page.locator('#toggle-display');
+    const toggleVisibility = page.locator('#toggle-visibility');
+    const toggleOpacity = page.locator('#toggle-opacity');
+    await expect(toggleDisplay).not.toBeVisible();
+    await expect(toggleVisibility).not.toBeVisible();
+    await expect(toggleOpacity).toBeVisible();
   });
 
   test('Тест изменения видимости элементов', async ({ page }) => {
@@ -35,6 +44,17 @@ test.describe('Тестирование видимости элементов с
     //      - display: block
     //      - visibility: visible
     //      - opacity: 1
+    await page.locator('#show-display').click();
+    await expect(page.locator('#toggle-opacity')).toBeVisible();
+    await expect(page.locator('#toggle-opacity')).toHaveCSS('display', 'block');
+
+    await page.locator('#show-visibility').click();
+    await expect(page.locator('#toggle-visibility')).toBeVisible();
+    await expect(page.locator('#toggle-visibility')).toHaveCSS('visibility', 'visible');
+
+    await page.locator('#show-opacity').click();
+    await expect(page.locator('#toggle-opacity')).toBeVisible();
+    await expect(page.locator('#toggle-opacity')).toHaveCSS('opacity', '1');
   });
 
   test('Тест элемента с задержкой появления', async ({ page }) => {
@@ -44,5 +64,9 @@ test.describe('Тестирование видимости элементов с
     // 3. Найти кнопку #show-delayed и кликнуть по ней
     // 4. С таймаутом 3 секунды дождаться появления элемента
     // 5. Проверить что элемент содержит текст "Элемент с задержкой появления"
+    await expect(page.locator('#delayed-element')).not.toBeVisible();
+    await page.locator('#show-delayed').click();
+    await page.locator('#delayed-element').waitFor({ timeout: 3000 });
+    await expect(page.locator('#delayed-element')).toHaveText('Элемент с задержкой появления');
   });
 });
