@@ -5,7 +5,7 @@
 ### 👨‍💻 Обо мне:
 
 Я QA-инженер. 
-у меня есть полноценная база во фронтенд-разработке. Я владею JavaScript (ES6+), TypeScript, React, уверенно работаю в WebStorm и 
+У меня есть полноценная база во фронтенд-разработке. Я владею JavaScript (ES6+), TypeScript, React, уверенно работаю в WebStorm и 
 понимаю архитектуру клиент-серверных приложений на уровне кода.
 
 - 📫 Как связаться со мной: [![Gmail Badge](https://img.shields.io/badge/-Gmail-red?style=flat&logo=Gmail&logoColor=white)](mailto:89585704814v@gmail.com)
